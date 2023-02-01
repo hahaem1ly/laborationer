@@ -1,0 +1,35 @@
+/*
+ * UPG_2_2.c
+ *
+ * Created: 2023-02-01 15:08:19
+ * Author : em2653ha-s
+ */ 
+#include <avr/io.h>
+#include "yoda.h"
+void swap(uint8_t *a, uint8_t *b);
+
+uint8_t var1 = 1;
+uint8_t var2 = 2;
+
+
+
+int main(void)
+{
+	
+	DDRB |= 0xFF;
+	while (1) {
+		swap(&var2, &var1);
+		if (var1 == 2) {
+			PORTB = 0xFF;
+			} else {
+			PORTB = 0;
+		}
+	}
+}
+void swap(uint8_t *a, uint8_t *b)
+{
+	/* swap the content of a and b */
+	uint8_t temp = *a;
+	*a = *b;
+	*b = temp;
+}
