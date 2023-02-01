@@ -1,0 +1,27 @@
+#include <avr/io.h>
+#include "yoda.h"
+
+
+
+
+
+int main(void)
+{
+	int present = 0;
+	int previous = 0;
+    /* Replace with your application code */
+    while (1) 
+    {
+		button_init(1);
+		led_init(1);
+		
+		present = button_read(1);
+		
+		if (present == 1 && previous == 0){
+			led_toggle(0);
+		}
+		previous = present;
+	
+	}
+}
+

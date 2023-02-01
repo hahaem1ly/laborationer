@@ -1,0 +1,61 @@
+#include <avr/io.h>
+#include "yoda.h"
+
+
+
+
+
+int main(void)
+{
+	int present = 0;
+	int previous = 0;
+    /* Replace with your application code */
+    while (1) 
+    {
+		button_init(1);
+		led_init(1);
+		
+		present = button_read(1);
+		
+		if (present == 1 && previous == 0){
+			led_toggle(0);
+		}
+		previous = present;
+	
+	}
+}
+
+
+/*
+ * laboration_1.c
+ *
+ * Created: 2023-02-01 10:19:09
+ * Author : em2653ha-s
+ */ 
+#include <avr/io.h>
+#include "yoda.h"
+#include <util/delay.h>
+
+int main(void)
+{
+	
+    /* Replace with your application code */
+    while (1) 
+    {
+		led_init(1);
+		for(int i = 0; i < 8; i++){
+		_delay_ms(500);
+		led_on(i);
+		led_off(i-1);		
+		}
+		for(int j = 8; j >= 0; j--){
+		_delay_ms(500);
+		led_on(j);	
+		led_off(j+1);
+		}
+	
+	}
+}
+
+
+
