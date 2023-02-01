@@ -1,0 +1,23 @@
+* lab1_2_2.c
+ *
+ * Created: 2023-02-01 15:33:41
+ * Author : em2653ha-s
+ */ 
+
+#include <avr/io.h>
+
+
+int main(void)
+{
+	char c = 'x';
+	char *pointer = &c; 
+    /* Replace with your application code */
+    while (1) 
+    {
+		function(pointer);
+		
+    }
+}
+void function(char *pointer){
+	
+}
