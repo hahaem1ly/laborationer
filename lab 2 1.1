@@ -2,15 +2,21 @@
 #include <avr/io.h>
 
 
+
 int main(void)
 {
-	uint16_t PB0 = 0; 
 	
-    /* Replace with your application code */
-    while (1) 
-    {
-		DDRB |= 0x01; // data riktning till register adressen 
-		PORTB |= 0x01;
-    }
+uint8_t dr = 0x24;  // register till portb aka led lamporna 
+uint8_t* drp = dr; // pointer sparar minnesadressen 
+
+*drp |= 0b00000100; // binärt lampa 3 
+
+uint8_t dp = 0x25; // öppnar upp porten 
+uint8_t* dpp = dp;
+
+*dpp |= 0b00000100;
+    while(1){
+		
+	}
 }
 
