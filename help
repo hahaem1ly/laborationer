@@ -36,5 +36,5 @@ int main(void) {
 	
 	return 0;
 }
-// YAT måste vara i string
+// YAT måste vara i char
 
