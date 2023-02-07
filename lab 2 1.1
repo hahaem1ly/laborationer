@@ -1,0 +1,16 @@
+
+#include <avr/io.h>
+
+
+int main(void)
+{
+	uint16_t PB0 = 0; 
+	
+    /* Replace with your application code */
+    while (1) 
+    {
+		DDRB |= 0x01; // data riktning till register adressen 
+		PORTB |= 0x01;
+    }
+}
+
