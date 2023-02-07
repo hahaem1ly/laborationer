@@ -14,7 +14,7 @@ int main(void)
     *dpp |= 0b00000100; */
 
     uint16_t *click = &PINA;
-    uint16_t *ddr_p = &PORTB;
+    uint16_t *ddr_p = &DDRB;
     uint16_t *b_p = &PORTB;
     *ddr_p |= 0b00000001;
 
@@ -22,7 +22,7 @@ int main(void)
 
     while (1)
     {
-        uint8_t button = *click & 0b00000001;
+        uint8_t button = *click &  0b00100001;
         if (toggle != button)
         {
             *b_p ^= 1 << *click;
