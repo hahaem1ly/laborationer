@@ -1,7 +1,7 @@
 #include <avr/io.h>
 
-#define BAUD 9600
-#define F_CPU 16000000UL
+#define BAUD 9600 // baudhastigheten 
+#define F_CPU 16000000UL 
 #define UBRR_VALUE F_CPU/16/BAUD-1
 
 void USART0_init(void) {
@@ -36,5 +36,4 @@ int main(void) {
 	
 	return 0;
 }
-// YAT måste vara i char
-
+// YAT in chacrcaters and char
