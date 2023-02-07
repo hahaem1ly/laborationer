@@ -31,3 +31,32 @@ int main(void)
     }
 }
 
+
+    /*int8_t dr = 0x24;  // register till portb aka led lamporna
+    uint8_t* drp = dr; // pointer sparar minnesadressen
+
+    *drp |= 0b00000100; // binärt lampa 3
+
+    uint8_t dp = 0x25; // öppnar upp porten
+    uint8_t* dpp = dp;
+
+    *dpp |= 0b00000100; */
+
+    uint16_t *click = &PINA;
+    uint16_t *ddr_p = &DDRB;
+    uint16_t *b_p = &PORTB;
+    *ddr_p |= 0b00001001;
+
+    uint8_t toggle = *click;
+
+    while (1)
+    {
+        uint8_t button = *click &  0b00100001;
+        if (toggle != button)
+        {
+            *b_p ^= 1 << *click;
+        }
+        toggle = button;
+    }
+}
+
