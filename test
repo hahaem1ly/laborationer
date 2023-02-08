@@ -1,0 +1,20 @@
+#include <avr/io.h>
+
+#define TOP_VALUE 20000 // Set the desired top value for ICR3
+
+int main(void)
+{
+  ICR3 = TOP_VALUE; // Set the top value for ICR3
+
+  TCCR3A |= (1 << WGM31) | (1 << COM3A1); // Set Timer/Counter 3 to Fast PWM mode and set output compare action on OCR3A
+  TCCR3B |= (1 << WGM33) | (1 << WGM32) | (1 << CS30); // Set Fast PWM mode, no prescaler and start the timer/counter
+
+  DDRB |= (1 << PB6); // Set PB6 as output
+
+  while(1) 
+  {
+    OCR3A = TOP_VALUE / 2; // Set the duty cycle to 50%
+  }
+
+  return 0;
+}
