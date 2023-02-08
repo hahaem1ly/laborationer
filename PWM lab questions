@@ -1,19 +1,22 @@
 Lab Question 3.2
-Write an application that initializes timer/counter 3 to generate a PWM signal. The period
-should be set to 0xFFFF. Set the pulse time to 0xFF.
+The period of the PWM signal is initialized to 0xFFFF, and the pulse time is set to 0xFF.
+
 Lab Question 3.3
-What is the PWM period when the timer is configured as above?
+The PWM period is 0xFFFF.
+
 Lab Question 3.4
-What is the duty cycle for the generated PWM signal?
-Now it is time to investigate how short the PWM period time needs to be in order to perceive the light
-emitted by the LED as continuous. Throughout this task a duty cycle of 50% should be kept.
-• Change the period of the PWM signal until the light from the LED looks continuous (the output
-compare register has to be changed as well).
+The duty cycle for the generated PWM signal is 0xFF/0xFFFF, or approximately 6.1%.
+
 Lab Question 3.5
-How short is the required period time?
-When the period time is found, it is possible to modulate the light intensity by changing the duty
-cycle.
+The required period time will depend on the specific LED being used, as well as the desired perception of "continuity." This cannot be answered without further information.
+
 Lab Question 3.6
-The way the 16-bit timer/counter was used here is not good. Why is that?
+The use of a 16-bit timer/counter may not be optimal because it may limit the effective resolution of the PWM signal, particularly if the period time needs to be very short. A higher resolution timer/counter may be necessary to achieve finer control over the PWM signal.
+
 Lab Question 3.7
-What is the effective resolution of the PWM signal?
+The effective resolution of the PWM signal is limited by the number of bits in the timer/counter, which in this case is 16 bits. The resolution can be calculated as 2^16 = 65536.
+Effektiv upplösning för en PWM-signal beror på det största antalet steg som den kan representera under en period. Ju fler steg som är tillgängliga, desto finare kontroll kan man ha över signalen. En 16-bits timer/räknare har en maximal värdeuppsättning på 65536 steg, vilket kan begränsa möjligheten att representera små ändringar i signalen om periodtiden är mycket kort.
+
+För att uppnå finare kontroll över PWM-signalen, behöver man öka antalet steg som den kan representera. Detta kan göras genom att använda en timer/räknare med högre upplösning, som till exempel en 32-bits timer/räknare, som har en maximal värdeuppsättning på 4294967296 steg.
+
+Således begränsar användandet av en 16-bits timer/räknare den effektiva upplösningen för PWM-signalen genom att begränsa möjligheten att representera små ändringar i signalen.
