@@ -1,0 +1,38 @@
+#include <avr/io.h>
+#define TOP_VALUE 1024
+#define TCCR3A_ADDRESS &TCCR3A
+#define TCCR3B_ADDRESS &TCCR3B
+#define ICR3_ADDRESS &ICR3
+
+void timer3_init(){
+    uint16_t* icr3_register = ICR3_ADDRESS;
+    *icr3_register = TOP_VALUE;
+
+    uint8_t *regA = TCCR3A_ADDRESS;
+    uint8_t *regB = TCCR3B_ADDRESS;
+
+    *regA |= (1 << WGM31) | (1 << COM3A1);
+    *regB |= (1 << WGM33) | (1 << WGM32) | (1 << CS30);
+
+    DDRB |= (1 << PB6);
+}
+
+void set_pulse(uint16_t pulse){
+    OCR3A = pulse;
+}
+
+void set_period(uint16_t period){
+    ICR3 = period;
+}
+
+int main(void)
+{
+    timer3_init();
+    set_pulse(TOP_VALUE / 2);
+    set_period(TOP_VALUE);
+    
+    while (1) 
+    {
+    }
+    return 0;
+}
