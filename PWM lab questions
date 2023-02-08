@@ -1,0 +1,19 @@
+Lab Question 3.2
+Write an application that initializes timer/counter 3 to generate a PWM signal. The period
+should be set to 0xFFFF. Set the pulse time to 0xFF.
+Lab Question 3.3
+What is the PWM period when the timer is configured as above?
+Lab Question 3.4
+What is the duty cycle for the generated PWM signal?
+Now it is time to investigate how short the PWM period time needs to be in order to perceive the light
+emitted by the LED as continuous. Throughout this task a duty cycle of 50% should be kept.
+• Change the period of the PWM signal until the light from the LED looks continuous (the output
+compare register has to be changed as well).
+Lab Question 3.5
+How short is the required period time?
+When the period time is found, it is possible to modulate the light intensity by changing the duty
+cycle.
+Lab Question 3.6
+The way the 16-bit timer/counter was used here is not good. Why is that?
+Lab Question 3.7
+What is the effective resolution of the PWM signal?
