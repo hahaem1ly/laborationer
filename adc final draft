@@ -1,0 +1,65 @@
+#include <avr/io.h>
+#define TOP_VALUE 1024
+#define TCCR3A_ADDRESS &TCCR3A
+#define TCCR3B_ADDRESS &TCCR3B
+#define ICR3_ADDRESS &ICR3
+#define ADC_CONTROL_REGA &ADCSRA // 
+#define ADMUX_ADRESS &ADMUX
+
+
+void timer3_init(){
+	uint16_t* icr3_register = ICR3_ADDRESS;
+	*icr3_register = TOP_VALUE;
+
+	uint8_t *regA = TCCR3A_ADDRESS;
+	uint8_t *regB = TCCR3B_ADDRESS;
+
+	*regA |= (1 << WGM31) | (1 << COM3A1);
+	*regB |= (1 << WGM33) | (1 << WGM32) | (1 << CS30);
+
+	DDRB |= (1 << PINB6);
+}
+
+void set_pulse(uint16_t pulse){
+	OCR3A = pulse;
+}
+
+void set_period(uint16_t period){
+	ICR3 = period;
+}
+void adc_init(){
+	ADCSRA |= (1<<ADEN); // enables the ADC 
+	ADCSRA |= (1 << ADPS2) | (1 << ADPS1)| (1 << ADPS0); // sätter frekvensen mellan 50 till 200khz, prescaling factor blir 128
+	ADMUX |= ( 1 << REFS0); // AVcc as refence voltage 
+	// set the channel to be read
+
+	
+	
+	
+}
+uint16_t adc_read(uint8_t channel)
+{
+	// set the channel to be read
+	ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+	// start the conversion process
+	ADCSRA |= (1 << ADSC);
+	// wait for the conversion to finish
+	while (ADCSRA & (1 << ADSC)) {}
+	// return the conversion result
+	return ADC;
+}
+
+int main(void)
+{
+	timer3_init();
+	adc_init();
+	set_period(TOP_VALUE);
+
+	while (1)
+	{
+		uint16_t input = adc_read(0);
+		set_pulse(input);
+	}
+
+	return 0;
+}
