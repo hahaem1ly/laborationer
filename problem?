@@ -1,0 +1,56 @@
+/*
+ * labb2kapp3.c
+ *
+ * Created: 2023-02-08 10:23:25
+ * Author : se1075sa-s
+ */ 
+
+#include <avr/io.h>
+#define TOP_VALUE 1024;
+#define ICR3_ADRESS 0x97;
+
+void timer3_init(){
+	uint16_t* icrregister = ICR3_ADRESS;
+	*icrregister = TOP_VALUE;
+	
+	uint16_t *regA = 0x90;
+	
+	uint16_t *regB = 0x91;
+	
+	*regA |= (1<<WGM31)|(1<<COM3A1);
+	*regB |= (1<<WGM33)|(1<<WGM33)|(1<<CS30);
+	
+	DDRB |= (1<<PINB6);
+	
+	
+	
+	
+}
+
+void set_pulse(uint16_t pulse){
+	OCR3A = pulse;
+// Pulse = 0x4E20
+	
+	
+}
+
+void set_period(uint16_t period){
+	ICR3 = period;
+	
+}
+
+
+
+int main(void)
+{
+	
+	timer3_init();
+	set_pulse(TOP_VALUE /2);
+	set_period(0x4E20);
+    /* Replace with your application code */
+    while (1) 
+    {
+    }
+	return 0;
+}
+
