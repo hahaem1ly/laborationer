@@ -7,3 +7,14 @@ void adc_init(void)
   // choose AVcc as reference voltage
   ADMUX |= (1 << REFS0);
 }
+uint16_t adc_read(uint8_t channel)
+{
+  // set the channel to be read
+  ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+  // start the conversion process
+  ADCSRA |= (1 << ADSC);
+  // wait for the conversion to finish
+  while (ADCSRA & (1 << ADSC)) {}
+  // return the conversion result
+  return ADC;
+}
