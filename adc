@@ -1,0 +1,9 @@
+void adc_init(void)
+{
+  // set the ADC prescaler to produce a signal frequency between 50kHz - 200KHz
+  ADCSRA |= (1 << ADPS2) | (1 << ADPS1);
+  // enable the ADC
+  ADCSRA |= (1 << ADEN);
+  // choose AVcc as reference voltage
+  ADMUX |= (1 << REFS0);
+}
