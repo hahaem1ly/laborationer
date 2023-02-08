@@ -1,0 +1,10 @@
+Lab Question 4.1:
+The prescaler factor selected was 128 and the frequency of the generated signal can be calculated as follows:
+Frequency = Clock_frequency / (Prescaler_factor * (1 + TOP)), where TOP is the value in the OCR3A register.
+
+Lab Question 4.2:
+The full intensity range is not achieved when turning the potentiometer because the PWM signal has a limited resolution. This can be solved by increasing the resolution of the PWM signal, which can be done by reducing the prescaler factor or increasing the value of the TOP register. Another solution could be to adjust the mapping between the ADC value and the PWM pulse width to better utilize the available range.
+
+Lab Question 4.3:
+The effective resolution of the PWM signal after scaling depends on the number of bits in the timer counter, the value of the prescaler factor and the value of the TOP register. A general formula for PWM resolution is:
+Resolution = log2(TOP) - log2(Prescaler_factor), where log2 is the logarithm function with base 2.
