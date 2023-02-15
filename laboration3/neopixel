@@ -1,0 +1,77 @@
+#define PINA 0x00
+#define PORTD 0x0B
+#define DDRA 0x01
+
+.global send_one
+.global send_zero
+.global send_ret
+.global read_buttons
+.extern button_state
+
+//223
+//32
+
+read_buttons:
+in r22, PINA //knapparna i reg16
+lsr r22
+lsr r22
+sts button_state, r22
+ret
+
+send_one:
+ldi r18, 0b00100000 //skicka in 5bit PIN5 till r18 //32
+in r19, PORTD //input port D i reg 19
+or r19, r18 // ger port D 1a SET TO HIGH
+out PORTD, r19 //skicka ut värde 32 till port D, Neopixel blir 1
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+
+ldi r18, 223 //value 223 till r18
+in r19, PORTD //skickar in port D till reg 19
+and r19, r18
+out PORTD, r19 //
+nop
+nop
+nop
+nop
+nop
+
+ret
+
+send_zero:
+ldi r18,0b00100000 // spara värde PIN5 => 0b00100000 = 2^5 = 32
+in r19, 0x0B // läser indata ger 1 portD till reg19
+or r19, r18 // ger värde 32 till portD
+out 0x0B, r19 // outputtar reg19 i PORT D (NeoPixels)
+nop
+
+ldi r18, 223 // r18 223
+and r19,r18 //ger 0a till r19
+out 0x0B,r19 //skicka 0a
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+nop
+
+ret
+
+send_ret:
+nop
+nop
+nop
+nop
+nop
+nop
+nop
